@@ -1,4 +1,4 @@
 export const demoCredential = {
-	username: "a",
-	password: "a",
+	username: "Admin",
+	password: "12345",
 }

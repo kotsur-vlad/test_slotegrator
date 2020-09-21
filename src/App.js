@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React, {useCallback, useEffect} from "react"
 import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 
@@ -37,20 +37,19 @@ function App () {
 	}, [dispatch])
 
 	//Check credentials from login's inputs
-	const checkAuth = (credential) => {
+	const checkAuth = useCallback((credential) => {
 		dispatch(checkAuthStatusAC(credential))
-	}
+	}, [dispatch])
 
 	//Tracking alert display's status, when incorrect credential was entered
-	const alertTracking = () => {
+	const alertTracking = useCallback(() => {
 		dispatch(denyAuthAlertAC())
-	}
+	}, [dispatch])
 
-	const showNextPage = (newCurrentPage) => {
+	const showNextPage = useCallback((newCurrentPage) => {
 		dispatch(setCurrentPageAC(newCurrentPage))
 		dispatch(fetchUsersTC(newCurrentPage))
-	}
-
+	}, [dispatch])
 
 	return (
 		<Router>

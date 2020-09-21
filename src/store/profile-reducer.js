@@ -2,7 +2,15 @@ import {usersAPI} from "../api/api"
 
 const GET_PROFILE = "profile/GET_PROFILE"
 
-const initialState = {}
+const initialState = {
+	picture: "",
+	name: "",
+	dob: "",
+	location: "",
+	email: "",
+	phone: "",
+	registered: "",
+}
 
 export const profileReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -19,7 +27,6 @@ export const fetchProfileTC = () => {
 	return (dispatch) => {
 		usersAPI.getAuthProfile()
 		.then(resp => {
-			// console.log(resp)
 			dispatch(getProfileAC(resp.data.results[0]))
 		})
 	}

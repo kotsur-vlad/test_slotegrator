@@ -21,7 +21,7 @@ export const usersReducer = (state = initialState, action) => {
 		case SET_CURRENT_PAGE:
 			return {
 				...state,
-				currentPage: action.newCurrentPage
+				currentPage: action.newCurrentPage,
 			}
 		default:
 			return state
@@ -35,7 +35,6 @@ export const fetchUsersTC = (currentPage) => {
 	return (dispatch) => {
 		usersAPI.getUsers(currentPage)
 		.then(resp => {
-			console.log(resp.data.results[0])
 			dispatch(getUsersAC(resp.data.results))
 		})
 	}

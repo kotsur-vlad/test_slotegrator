@@ -15,9 +15,9 @@ const instance = axios.create({
 
 export const usersAPI = {
 	getAuthProfile () {
-		return instance.get("?seed=admin")
+		return instance.get("?inc=name,location,email,registered,dob,phone,picture&seed=Admin")
 	},
 	getUsers (currentPage) {
-		return instance.get(`?page=${currentPage}&results=20&seed=users`)
-	}
+		return instance.get(`?page=${currentPage}&results=20&inc=name,location,dob,cell,picture&seed=users`)
+	},
 }

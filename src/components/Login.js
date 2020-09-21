@@ -1,7 +1,6 @@
 import React, {useCallback, useState} from "react"
 
 export const Login = React.memo((props) => {
-
 	//Local state for inputs
 	const [credential, setCredential] = useState({
 		username: "",
