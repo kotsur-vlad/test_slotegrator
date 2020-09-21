@@ -1,4 +1,4 @@
-## test_slotegrator
+# test_slotegrator
 
 Приложение, которое выбирает определенные данные, используя API - https://randomuser.me/api
 
@@ -6,12 +6,12 @@
 
 Данные для входа в профиль:
 
-Имя пользователя - Admin
-
-Пароль - 12345
+    > Имя пользователя - Admin
+    
+    > Пароль - 12345
 
 Стек - React, Hooks, Redux, Thunks, Material UI, Routing, axios
-
+***
 ## Available Scripts
 
 In the project directory, you can run:
