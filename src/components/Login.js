@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useCallback, useState} from "react"
 
 export const Login = React.memo((props) => {
 
@@ -8,8 +8,9 @@ export const Login = React.memo((props) => {
 		password: "",
 	})
 
-	const usernameHandler = (event) => {
-		props.authAlertTracking(false)
+	//Handlers for inputs
+	const usernameHandler = useCallback((event) => {
+		props.alertTracking(false)
 		const username = event.currentTarget.value
 		setCredential(prev => {
 			return {
@@ -17,10 +18,9 @@ export const Login = React.memo((props) => {
 				username,
 			}
 		})
-	}
-
-	const passwordHandler = (event) => {
-		props.authAlertTracking(false)
+	}, [props.alertTracking])
+	const passwordHandler = useCallback((event) => {
+		props.alertTracking(false)
 		const password = event.currentTarget.value
 		setCredential(prev => {
 			return {
@@ -28,15 +28,16 @@ export const Login = React.memo((props) => {
 				password,
 			}
 		})
-	}
+	}, [props.alertTracking])
 
-	const loginButtonHandler = () => {
+	//Handler for credential
+	const loginButtonHandler = useCallback(() => {
 		props.checkAuth(credential)
 		setCredential({
 			username: "",
 			password: "",
 		})
-	}
+	}, [props.checkAuth, credential])
 
 	return (
 		<div>

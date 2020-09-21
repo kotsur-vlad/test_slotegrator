@@ -1,22 +1,23 @@
-import React, {useEffect, useState} from "react"
+import React, {useEffect} from "react"
 import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom"
+import {useDispatch, useSelector} from "react-redux"
 
 import "./App.css"
-import {Main} from "./Main"
-import {Login} from "./Login"
-import {Navbar} from "./Navbar"
-import {Profile} from "./Profile"
-import {Users} from "./Users"
+import {Main} from "./components/Main"
+import {Login} from "./components/Login"
+import {Navbar} from "./components/Navbar"
+import {Profile} from "./components/Profile"
+import {Users} from "./components/Users"
+import {fetchProfileTC} from "./store/profile-reducer"
+import {checkAuthStatusAC, denyAuthAlertAC, getLocalAuthStatusAC} from "./store/login-reducer"
 
 function App () {
-	//State
-	const [authStatus, setAuthStatus] = useState(null)
-	const [authAlert, setAuthAlert] = useState(false)
-	//Auth data
-	const demoCredential = {
-		username: "Admin",
-		password: "12345",
-	}
+	const dispatch = useDispatch()
+	const profile = useSelector(state => state.profile)
+	const authStatus = useSelector(state => state.authStatus.status)
+	const authAlert = useSelector(state => state.authStatus.alert)
+
+
 	//Users
 	const users = [
 		{
@@ -37,32 +38,29 @@ function App () {
 		},
 	]
 
-	//Side effects
+
+	//Receive local auth status
 	useEffect(() => {
-		const authStatus = JSON.parse(localStorage.getItem("isAuth"))
-		if (authStatus === null) {
-			localStorage.setItem("isAuth", "false")
-			setAuthStatus(false)
-		} else {
-			setAuthStatus(authStatus)
+		dispatch(getLocalAuthStatusAC())
+	}, [dispatch])
+
+	//Receive authorized profile
+	useEffect(() => {
+		if (authStatus) {
+			dispatch(fetchProfileTC())
 		}
-	}, [])
+	}, [dispatch, authStatus])
 
-
-	//Methods
+	//Check credentials from login's inputs
 	const checkAuth = (credential) => {
-		if (JSON.stringify(demoCredential) === JSON.stringify(credential)) {
-			localStorage.setItem("isAuth", "true")
-			setAuthStatus(true)
-		} else {
-			localStorage.setItem("isAuth", "false")
-			setAuthAlert(true)
-		}
+		dispatch(checkAuthStatusAC(credential))
 	}
 
-	const authAlertTracking = (status) => {
-		setAuthAlert(status)
+	//Tracking alert display's status, when incorrect credential was entered
+	const alertTracking = () => {
+		dispatch(denyAuthAlertAC())
 	}
+
 
 	return (
 		<Router>
@@ -75,7 +73,7 @@ function App () {
 							<Main/>
 						</Route>
 						<Route path={"/profile"}>
-							{authStatus ? <Profile/> : <Redirect to="/login"/>}
+							{authStatus ? <Profile profile={profile}/> : <Redirect to="/login"/>}
 						</Route>
 						<Route path={"/users"}>
 							<Users users={users}/>
@@ -83,7 +81,7 @@ function App () {
 						<Route path={"/login"}>
 							{!authStatus ? <Login checkAuth={checkAuth}
 												  authAlert={authAlert}
-												  authAlertTracking={authAlertTracking}/>
+												  alertTracking={alertTracking}/>
 								: <Redirect to="/profile"/>}
 						</Route>
 					</div>
