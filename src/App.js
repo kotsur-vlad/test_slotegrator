@@ -10,34 +10,14 @@ import {Profile} from "./components/Profile"
 import {Users} from "./components/Users"
 import {fetchProfileTC} from "./store/profile-reducer"
 import {checkAuthStatusAC, denyAuthAlertAC, getLocalAuthStatusAC} from "./store/login-reducer"
+import {fetchUsersTC, setCurrentPageAC} from "./store/users-reducer"
 
 function App () {
 	const dispatch = useDispatch()
 	const profile = useSelector(state => state.profile)
 	const authStatus = useSelector(state => state.authStatus.status)
 	const authAlert = useSelector(state => state.authStatus.alert)
-
-
-	//Users
-	const users = [
-		{
-			id: "1",
-			name: "1",
-			email: "2",
-			address: "4",
-			number: "5",
-			picture: "6",
-		},
-		{
-			id: "2",
-			name: "1",
-			email: "2",
-			address: "4",
-			number: "5",
-			picture: "6",
-		},
-	]
-
+	const users = useSelector(state => state.users)
 
 	//Receive local auth status
 	useEffect(() => {
@@ -51,6 +31,11 @@ function App () {
 		}
 	}, [dispatch, authStatus])
 
+	//Receive list of users
+	useEffect(() => {
+		dispatch(fetchUsersTC(users.currentPage))
+	}, [dispatch])
+
 	//Check credentials from login's inputs
 	const checkAuth = (credential) => {
 		dispatch(checkAuthStatusAC(credential))
@@ -59,6 +44,11 @@ function App () {
 	//Tracking alert display's status, when incorrect credential was entered
 	const alertTracking = () => {
 		dispatch(denyAuthAlertAC())
+	}
+
+	const showNextPage = (newCurrentPage) => {
+		dispatch(setCurrentPageAC(newCurrentPage))
+		dispatch(fetchUsersTC(newCurrentPage))
 	}
 
 
@@ -76,7 +66,9 @@ function App () {
 							{authStatus ? <Profile profile={profile}/> : <Redirect to="/login"/>}
 						</Route>
 						<Route path={"/users"}>
-							<Users users={users}/>
+							<Users users={users.users}
+								   currentPage={users.currentPage}
+								   showNextPage={showNextPage}/>
 						</Route>
 						<Route path={"/login"}>
 							{!authStatus ? <Login checkAuth={checkAuth}

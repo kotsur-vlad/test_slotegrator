@@ -4,16 +4,23 @@ import {User} from "./User"
 
 export const Users = React.memo((props) => {
 
-	const users = props.users.map(u => <User key={u.id}
-											 picture={u.picture}
-											 name={u.name}
-											 address={u.address}
+	const users = props.users.map(u => <User key={u.cell}
+											 picture={u.picture.medium}
+											 name={u.name.first}
+											 address={u.location.city}
 											 email={u.email}
-											 number={u.number}/>)
+											 number={u.phone}/>)
+
+
+	const showNextPageHandler = () => {
+		let newCurrentPage = props.currentPage
+		props.showNextPage(newCurrentPage+1)
+	}
 
 	return (
 		<div>
 			{users}
+			<button onClick={showNextPageHandler}>Показать еще</button>
 			Юзеры
 		</div>
 	)
