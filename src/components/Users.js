@@ -1,4 +1,5 @@
 import React, {useCallback} from "react"
+import {Button} from "@material-ui/core"
 
 import {User} from "./User"
 
@@ -20,9 +21,11 @@ export const Users = React.memo((props) => {
 	return (
 		<div>
 			{users}
-			<button onClick={showNextPageHandler}>
+			<Button variant="outlined"
+					color="primary"
+					onClick={showNextPageHandler}>
 				Показать еще
-			</button>
+			</Button>
 		</div>
 	)
 })
