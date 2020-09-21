@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/test_slotegrator/static/css/main.0b2ac838.chunk.css",
+    "main.js": "/test_slotegrator/static/js/main.ab16f5bf.chunk.js",
+    "main.js.map": "/test_slotegrator/static/js/main.ab16f5bf.chunk.js.map",
+    "runtime-main.js": "/test_slotegrator/static/js/runtime-main.dbed94e9.js",
+    "runtime-main.js.map": "/test_slotegrator/static/js/runtime-main.dbed94e9.js.map",
+    "static/js/2.5720add7.chunk.js": "/test_slotegrator/static/js/2.5720add7.chunk.js",
+    "static/js/2.5720add7.chunk.js.map": "/test_slotegrator/static/js/2.5720add7.chunk.js.map",
+    "index.html": "/test_slotegrator/index.html",
+    "precache-manifest.b7b32ba40cf93a6c81a0278746ea9d23.js": "/test_slotegrator/precache-manifest.b7b32ba40cf93a6c81a0278746ea9d23.js",
+    "service-worker.js": "/test_slotegrator/service-worker.js",
+    "static/css/main.0b2ac838.chunk.css.map": "/test_slotegrator/static/css/main.0b2ac838.chunk.css.map",
+    "static/js/2.5720add7.chunk.js.LICENSE.txt": "/test_slotegrator/static/js/2.5720add7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dbed94e9.js",
+    "static/js/2.5720add7.chunk.js",
+    "static/css/main.0b2ac838.chunk.css",
+    "static/js/main.ab16f5bf.chunk.js"
+  ]
+}
