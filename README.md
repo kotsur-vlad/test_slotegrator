@@ -1,14 +1,16 @@
+## test_slotegrator
+
 Приложение, которое выбирает определенные данные, используя API - https://randomuser.me/api
 
 Развернутый проект по ссылке: https://kotsur-vlad.github.io/test_slotegrator/#/
 
 Данные для входа в профиль:
+
 Имя пользователя - Admin
+
 Пароль - 12345
 
 Стек - React, Hooks, Redux, Thunks, Material UI, Routing, axios
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
